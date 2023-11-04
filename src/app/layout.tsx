@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inknut_Antiqua } from "next/font/google";
-import "./globals.css";
 
-const inknut = Inknut_Antiqua({ subsets: ["latin"], weight: ["400"] });
+import "./globals.css";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+
+const inknut = Inknut_Antiqua({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Great Brain School",
@@ -16,7 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inknut.className}>{children}</body>
+      <body
+        className={`${inknut.className} bg-[#FDFFFA] flex flex-col text-[#010101]`}
+      >
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
