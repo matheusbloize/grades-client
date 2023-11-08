@@ -1,9 +1,9 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 interface Props {
   firstName: string;
   lastName: string;
-  profile: StaticImageData;
+  profile: string;
 }
 
 const Student = ({ firstName, lastName, profile }: Props) => {
@@ -14,9 +14,9 @@ const Student = ({ firstName, lastName, profile }: Props) => {
           className="rounded-[.25em]"
           src={profile}
           alt={`${firstName} ${lastName}`}
-          width={0}
-          height={0}
-          style={{ width: "100%", height: "auto" }}
+          width={140}
+          height={180}
+          style={{ width: "100%", height: "100%" }}
         />
       </div>
       <div className="flex flex-col gap-[.5em] items-center mt-[1em]">

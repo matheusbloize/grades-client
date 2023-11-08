@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import logoImage from "@/assets/images/logo.svg";
 import teacherImage from "@/assets/images/teacher.svg";
@@ -6,10 +7,10 @@ import teacherImage from "@/assets/images/teacher.svg";
 const Header = () => {
   return (
     <header className="flex justify-between w-[95%] mx-auto mt-[1em] max-md:flex-col">
-      <div className="flex flex-col items-center">
+      <Link href={"/"} className="flex flex-col items-center">
         <Image src={logoImage} alt="school logo" />
         <h1 className="font-bold text-[1.2em]">Great Brain School</h1>
-      </div>
+      </Link>
       <div className="flex items-center max-md:justify-end">
         <div className="flex items-end gap-[1.5em]">
           <Image src={teacherImage} alt="teacher" />
