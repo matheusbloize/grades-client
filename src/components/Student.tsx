@@ -1,15 +1,34 @@
+"use client";
+
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   firstName: string;
   lastName: string;
   profile: string;
+  setActualStudent: Dispatch<SetStateAction<HTMLDivElement | null>>;
+  studentPosition: number;
 }
 
-const Student = ({ firstName, lastName, profile }: Props) => {
+const Student = ({
+  firstName,
+  lastName,
+  profile,
+  setActualStudent,
+  studentPosition,
+}: Props) => {
+  const handleDragStart = (e: React.DragEvent) => {
+    setActualStudent(e.currentTarget as HTMLDivElement);
+  };
+
   return (
     <div className="flex flex-col items-center">
-      <div className="border-solid border-[.313em] border-[#010101] rounded-[.625em] w-[9.375em] h-[11.875em]">
+      <div
+        id={`draggable-student-${studentPosition}`}
+        onDragStart={handleDragStart}
+        className="border-solid border-[.313em] border-[#010101] rounded-[.625em] w-[9.375em] h-[11.875em] transition-all hover:shadow-student"
+      >
         <Image
           className="rounded-[.25em]"
           src={profile}

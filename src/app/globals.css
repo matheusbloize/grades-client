@@ -11,3 +11,12 @@
 html, body, #root {
   height: 100%;
 }
+
+a, img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.drag {
+  -webkit-user-drag: auto;
+}
