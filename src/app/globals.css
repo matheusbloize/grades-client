@@ -20,3 +20,9 @@ a, img {
 .drag {
   -webkit-user-drag: auto;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
