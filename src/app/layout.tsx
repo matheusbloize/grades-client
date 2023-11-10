@@ -4,6 +4,7 @@ import { Inknut_Antiqua } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { AwardContextProvider } from "@/contexts/AwardContext";
 
 const inknut = Inknut_Antiqua({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
         className={`${inknut.className} bg-[#FDFFFA] flex flex-col text-[#010101]`}
       >
         <Header />
-        {children}
+        <AwardContextProvider>{children}</AwardContextProvider>
         <Footer />
       </body>
     </html>

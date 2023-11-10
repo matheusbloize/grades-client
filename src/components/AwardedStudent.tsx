@@ -5,50 +5,37 @@ import Image from "next/image";
 import noUserImage from "@/assets/images/question.png";
 
 interface Props {
-  firstName: string;
-  lastName: string;
+  name: string;
+  photo: string;
   award: string;
   color: string;
   actualStudent: HTMLDivElement | null;
   awardPosition: number;
+  contextFunction: (
+    name: string,
+    photo: string,
+    color: string,
+    position: number,
+  ) => void;
 }
 
 const AwardedStudent = ({
-  firstName,
-  lastName,
+  name,
+  photo,
   award,
   color: propColor,
   actualStudent,
   awardPosition,
+  contextFunction,
 }: Props) => {
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = () => {
     if (actualStudent) {
-      const currentTarget = e.currentTarget as HTMLDivElement;
-      // student photo
-      (currentTarget.children[0].children[0] as HTMLImageElement).srcset = (
-        actualStudent!.children[0] as HTMLImageElement
-      ).srcset;
-      (currentTarget.children[0].children[0] as HTMLImageElement).alt = (
-        actualStudent!.children[0] as HTMLImageElement
-      ).alt;
-      // student name
-      (currentTarget.children[1].children[0] as HTMLHeadingElement).innerText =
-        (actualStudent!.children[0] as HTMLImageElement).alt;
-      // colors
-      (currentTarget.children[0] as HTMLDivElement).style.borderColor =
-        propColor;
-      (
-        currentTarget.children[1].children[0] as HTMLHeadingElement
-      ).style.color = propColor;
-      (currentTarget.children[1].children[1] as HTMLSpanElement).style.color =
-        propColor;
-
-      const awardStudentPhoto = document.querySelectorAll(".award-student")[
-        awardPosition - 1
-      ] as HTMLImageElement;
-      if (awardStudentPhoto) {
-        awardStudentPhoto.style.height = "100%";
-      }
+      contextFunction(
+        (actualStudent!.children[0] as HTMLImageElement).alt,
+        (actualStudent!.children[0] as HTMLImageElement).src,
+        propColor,
+        awardPosition,
+      );
     }
   };
 
@@ -65,23 +52,23 @@ const AwardedStudent = ({
       <div
         className={`rounded-[.625em] w-[9.375em] h-[11.875em] flex justify-center items-center`}
         style={{
-          border: `solid .313em ${firstName !== "Not" ? propColor : "#010101"}`,
+          border: `solid .313em ${photo ? propColor : "#010101"}`,
         }}
       >
         <Image
           className="rounded-[.25em] award-student"
-          src={noUserImage}
-          alt={`${firstName} ${lastName}`}
-          width={0}
-          height={0}
-          style={{ width: "100%", height: "auto" }}
+          src={photo ? photo : noUserImage}
+          alt={name}
+          width={300}
+          height={350}
+          style={{ width: "100%", height: `${photo ? "100%" : "auto"}` }}
         />
       </div>
       <div
         className="flex flex-col gap-[.5em] items-center mt-[1em]"
-        style={{ color: "#010101" }}
+        style={{ color: `${photo ? propColor : "#010101"}` }}
       >
-        <h3>{`${firstName} ${lastName}`}</h3>
+        <h3>{name}</h3>
         <span>{award}</span>
       </div>
     </div>

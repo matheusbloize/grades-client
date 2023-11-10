@@ -72,6 +72,31 @@ const Student = () => {
     findStudent();
   }, [findStudent, params.id]);
 
+  const handleGrades = () => {
+    const gradesSection = document.getElementById(
+      "grades-section",
+    ) as HTMLDivElement;
+    const gradesArr: number[] = [];
+    for (let i = 0; i < gradesSection.children.length; i++) {
+      if (
+        Number(
+          (gradesSection.children[i].children[1] as HTMLInputElement).value,
+        ) > 10
+      ) {
+        alert("Grade Point must be between 0 and 10");
+        return;
+      }
+      gradesArr.push(
+        Number(
+          (gradesSection.children[i].children[1] as HTMLInputElement).value,
+        ),
+      );
+    }
+    console.log(gradesArr); // Arr das notas
+    const gradeAverage = gradesArr.reduce((prev, curr) => prev + curr) / 6;
+    console.log(gradeAverage); // Média das notas
+  };
+
   return (
     <main className="w-[85%] mx-auto flex-1 flex flex-col items-center">
       <section className="flex w-full gap-[2em] mt-[2em] max-md:flex-col max-md:items-center">
@@ -119,6 +144,7 @@ const Student = () => {
           />
         </Link>
         <Image
+          onClick={handleGrades}
           tabIndex={0}
           className="transition-all cursor-pointer hover:scale-[1.1] hover:mix-blend-color-burn"
           src={checkImage}

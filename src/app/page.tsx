@@ -7,8 +7,10 @@ import { useState, useEffect } from "react";
 import trophyImage from "@/assets/images/trophy.svg";
 import AwardedStudent from "@/components/AwardedStudent";
 import Student from "@/components/Student";
+import { useAwardContext } from "@/hooks/useAwardContext";
 
 const Home = () => {
+  const { awardedStudents, setAwardedStudents } = useAwardContext();
   const [actualStudent, setActualStudent] = useState<HTMLDivElement | null>(
     null,
   );
@@ -23,6 +25,42 @@ const Home = () => {
     }
   }, []);
 
+  const handleAwardedContext = (
+    name: string,
+    photo: string,
+    color: string,
+    position: number,
+  ) => {
+    switch (position) {
+      case 1:
+        setAwardedStudents({
+          ...awardedStudents,
+          award1: { name, photo, color },
+        });
+        break;
+      case 2:
+        setAwardedStudents({
+          ...awardedStudents,
+          award2: { name, photo, color },
+        });
+        break;
+      case 3:
+        setAwardedStudents({
+          ...awardedStudents,
+          award3: { name, photo, color },
+        });
+        break;
+      case 4:
+        setAwardedStudents({
+          ...awardedStudents,
+          award4: { name, photo, color },
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <main className="w-[95%] mx-auto flex-1 flex flex-col items-center mt-[1em]">
       <div className="flex items-center">
@@ -32,36 +70,40 @@ const Home = () => {
       </div>
       <section className="border-solid border-[.063em] border-[#010101] w-[85%] mt-[1em] py-[1.75em] rounded-[1.25em] flex justify-around flex-wrap gap-[1em] px-[1em]">
         <AwardedStudent
-          firstName="Not"
-          lastName="defined yet"
+          name={awardedStudents.award1!.name}
+          photo={awardedStudents.award1!.photo}
           award="Greatest Effort"
-          color="#FF1B6D"
+          color={awardedStudents.award1!.color}
           actualStudent={actualStudent}
           awardPosition={1}
+          contextFunction={handleAwardedContext}
         />
         <AwardedStudent
-          firstName="Not"
-          lastName="defined yet"
+          name={awardedStudents.award2!.name}
+          photo={awardedStudents.award2!.photo}
           award="Best Improvement"
-          color="#4EF6FF"
+          color={awardedStudents.award2!.color}
           actualStudent={actualStudent}
           awardPosition={2}
+          contextFunction={handleAwardedContext}
         />
         <AwardedStudent
-          firstName="Not"
-          lastName="defined yet"
+          name={awardedStudents.award3!.name}
+          photo={awardedStudents.award3!.photo}
           award="Best Behavior"
-          color="#4F52B1"
+          color={awardedStudents.award3!.color}
           actualStudent={actualStudent}
           awardPosition={3}
+          contextFunction={handleAwardedContext}
         />
         <AwardedStudent
-          firstName="Not"
-          lastName="defined yet"
+          name={awardedStudents.award4!.name}
+          photo={awardedStudents.award4!.photo}
           award="Best Support"
-          color="#5BFFD4"
+          color={awardedStudents.award4!.color}
           actualStudent={actualStudent}
           awardPosition={4}
+          contextFunction={handleAwardedContext}
         />
       </section>
       <div className="w-full bg-[#010101] h-[.063em] mt-[2em]"></div>
