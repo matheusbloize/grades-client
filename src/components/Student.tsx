@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
+
+import StudentPhoto from "./StudentPhoto";
 
 interface Props {
   firstName: string;
@@ -9,6 +10,7 @@ interface Props {
   profile: string;
   setActualStudent: Dispatch<SetStateAction<HTMLDivElement | null>>;
   studentPosition: number;
+  contextFunction: (position: number) => "#4aff7b" | "#f12815" | "#010101";
 }
 
 const Student = ({
@@ -17,6 +19,7 @@ const Student = ({
   profile,
   setActualStudent,
   studentPosition,
+  contextFunction,
 }: Props) => {
   const handleDragStart = (e: React.DragEvent) => {
     setActualStudent(e.currentTarget as HTMLDivElement);
@@ -27,15 +30,17 @@ const Student = ({
       <div
         id={`draggable-student-${studentPosition}`}
         onDragStart={handleDragStart}
-        className="border-solid border-[.313em] border-[#010101] rounded-[.625em] w-[9.375em] h-[11.875em] transition-all hover:shadow-student"
+        className={`border-solid border-[.313em] rounded-[.625em] w-[9.375em] h-[11.875em] transition-all hover:shadow-student`}
+        style={{
+          borderColor: contextFunction(studentPosition)
+            ? contextFunction(studentPosition)
+            : "#333",
+        }}
       >
-        <Image
-          className="rounded-[.25em]"
-          src={profile}
-          alt={`${firstName} ${lastName}`}
-          width={140}
-          height={180}
-          style={{ width: "100%", height: "100%" }}
+        <StudentPhoto
+          profile={profile}
+          firstName={firstName}
+          lastName={lastName}
         />
       </div>
       <div className="flex flex-col gap-[.5em] items-center mt-[1em]">

@@ -1,18 +1,21 @@
 "use client";
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface Props {
   name: string;
+  gradePoints: [number, number, number, number, number, number];
+  subjectPosition: number;
 }
 
-const Subject = ({ name }: Props) => {
-  // const [grade, setGrade] = useState<number | undefined>(undefined);
-
+const Subject = ({ name, gradePoints, subjectPosition }: Props) => {
+  const [points, setPoints] = useState(
+    gradePoints[subjectPosition + 5]?.toString(),
+  );
   const handleGrade = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     if (Number(e.target.value) > 10)
       alert("Grade Point must be between 0 and 10");
+    setPoints(e.target.value);
   };
 
   return (
@@ -22,7 +25,7 @@ const Subject = ({ name }: Props) => {
       </div>
       <input
         onChange={handleGrade}
-        // value={grade}
+        placeholder={points}
         type="number"
         min={0}
         max={10}

@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { AwardContextProvider } from "@/contexts/AwardContext";
+import { GradeContextProvider } from "@/contexts/GradeContext";
 
 const inknut = Inknut_Antiqua({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
         className={`${inknut.className} bg-[#FDFFFA] flex flex-col text-[#010101]`}
       >
         <Header />
-        <AwardContextProvider>{children}</AwardContextProvider>
+        <AwardContextProvider>
+          <GradeContextProvider>{children}</GradeContextProvider>
+        </AwardContextProvider>
         <Footer />
       </body>
     </html>

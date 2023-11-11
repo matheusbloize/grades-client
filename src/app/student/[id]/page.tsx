@@ -19,11 +19,13 @@ import {
   student8,
   student9,
   student10,
-  StudentInterface,
 } from "@/data/students";
+import { useGradeContext } from "@/hooks/useGradeContext";
+import { StudentInfoStudentPage } from "@/models/StudentModel";
 
 const Student = () => {
-  const [student, setStudent] = useState<StudentInterface>();
+  const { studentGrade, setStudentGrade } = useGradeContext();
+  const [student, setStudent] = useState<StudentInfoStudentPage>();
   const params = useParams();
 
   const findStudent = useCallback(() => {
@@ -63,6 +65,7 @@ const Student = () => {
           name: "Student Not Found",
           age: 999,
           subject: "nothing",
+          points: [0, 0, 0, 0, 0, 0],
         });
         redirect("/");
     }
@@ -76,7 +79,9 @@ const Student = () => {
     const gradesSection = document.getElementById(
       "grades-section",
     ) as HTMLDivElement;
-    const gradesArr: number[] = [];
+    const gradesArr: [number, number, number, number, number, number] = [
+      0, 0, 0, 0, 0, 0,
+    ];
     for (let i = 0; i < gradesSection.children.length; i++) {
       if (
         Number(
@@ -92,9 +97,131 @@ const Student = () => {
         ),
       );
     }
-    console.log(gradesArr); // Arr das notas
     const gradeAverage = gradesArr.reduce((prev, curr) => prev + curr) / 6;
-    console.log(gradeAverage); // Média das notas
+    handleGradeContext(gradeAverage, gradesArr);
+  };
+
+  const handleGradeContext = (
+    gradeAvg: number,
+    gradeArr: [number, number, number, number, number, number],
+  ) => {
+    if (student) {
+      student.points = gradeArr;
+    }
+    switch (params.id) {
+      case "1":
+        setStudentGrade({
+          ...studentGrade,
+          student1: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "2":
+        setStudentGrade({
+          ...studentGrade,
+          student2: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "3":
+        setStudentGrade({
+          ...studentGrade,
+          student3: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "4":
+        setStudentGrade({
+          ...studentGrade,
+          student4: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "5":
+        setStudentGrade({
+          ...studentGrade,
+          student5: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "6":
+        setStudentGrade({
+          ...studentGrade,
+          student6: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "7":
+        setStudentGrade({
+          ...studentGrade,
+          student7: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "8":
+        setStudentGrade({
+          ...studentGrade,
+          student8: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "9":
+        setStudentGrade({
+          ...studentGrade,
+          student9: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      case "10":
+        setStudentGrade({
+          ...studentGrade,
+          student10: {
+            name: student!.name,
+            gradePoints: gradeArr,
+            averageGrade: gradeAvg,
+            addedByTeacher: true,
+          },
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -125,12 +252,40 @@ const Student = () => {
               id="grades-section"
               className="grid grid-cols-6 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-[1em] w-full mt-[1em] place-items-center"
             >
-              <Subject name="Science" />
-              <Subject name="Math" />
-              <Subject name="English" />
-              <Subject name="P.E." />
-              <Subject name="Finance" />
-              <Subject name="History" />
+              {student && (
+                <>
+                  <Subject
+                    name="Science"
+                    gradePoints={student!.points}
+                    subjectPosition={1}
+                  />
+                  <Subject
+                    name="Math"
+                    gradePoints={student!.points}
+                    subjectPosition={2}
+                  />
+                  <Subject
+                    name="English"
+                    gradePoints={student!.points}
+                    subjectPosition={3}
+                  />
+                  <Subject
+                    name="P.E."
+                    gradePoints={student!.points}
+                    subjectPosition={4}
+                  />
+                  <Subject
+                    name="Finance"
+                    gradePoints={student!.points}
+                    subjectPosition={5}
+                  />
+                  <Subject
+                    name="History"
+                    gradePoints={student!.points}
+                    subjectPosition={6}
+                  />
+                </>
+              )}
             </section>
           </article>
         </section>
@@ -143,13 +298,15 @@ const Student = () => {
             alt="return"
           />
         </Link>
-        <Image
-          onClick={handleGrades}
-          tabIndex={0}
-          className="transition-all cursor-pointer hover:scale-[1.1] hover:mix-blend-color-burn"
-          src={checkImage}
-          alt="check"
-        />
+        <Link href={"/"}>
+          <Image
+            onClick={handleGrades}
+            tabIndex={0}
+            className="transition-all cursor-pointer hover:scale-[1.1] hover:mix-blend-color-burn"
+            src={checkImage}
+            alt="check"
+          />
+        </Link>
       </div>
     </main>
   );

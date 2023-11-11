@@ -8,12 +8,15 @@ import trophyImage from "@/assets/images/trophy.svg";
 import AwardedStudent from "@/components/AwardedStudent";
 import Student from "@/components/Student";
 import { useAwardContext } from "@/hooks/useAwardContext";
+import { useGradeContext } from "@/hooks/useGradeContext";
 
 const Home = () => {
   const { awardedStudents, setAwardedStudents } = useAwardContext();
+  const { studentGrade } = useGradeContext();
   const [actualStudent, setActualStudent] = useState<HTMLDivElement | null>(
     null,
   );
+  let feedback: "#4aff7b" | "#f12815" | "#010101";
 
   useEffect(() => {
     if (document.getElementById(`draggable-student-1`)) {
@@ -59,6 +62,104 @@ const Home = () => {
       default:
         break;
     }
+  };
+
+  const handleFeedback = (position: number) => {
+    switch (position) {
+      case 1:
+        if (studentGrade.student1.addedByTeacher) {
+          studentGrade.student1.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 2:
+        if (studentGrade.student2.addedByTeacher) {
+          studentGrade.student2.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 3:
+        if (studentGrade.student3.addedByTeacher) {
+          studentGrade.student3.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 4:
+        if (studentGrade.student4.addedByTeacher) {
+          studentGrade.student4.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 5:
+        if (studentGrade.student5.addedByTeacher) {
+          studentGrade.student5.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 6:
+        if (studentGrade.student6.addedByTeacher) {
+          studentGrade.student6.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 7:
+        if (studentGrade.student7.addedByTeacher) {
+          studentGrade.student7.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 8:
+        if (studentGrade.student8.addedByTeacher) {
+          studentGrade.student8.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 9:
+        if (studentGrade.student9.addedByTeacher) {
+          studentGrade.student9.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      case 10:
+        if (studentGrade.student10.addedByTeacher) {
+          studentGrade.student10.averageGrade >= 8
+            ? (feedback = "#4aff7b")
+            : (feedback = "#f12815");
+        } else {
+          feedback = "#010101";
+        }
+        break;
+      default:
+        break;
+    }
+    return feedback!;
   };
 
   return (
@@ -116,6 +217,7 @@ const Home = () => {
             profile={`/static/images/student1.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={1}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/2"}>
@@ -125,6 +227,7 @@ const Home = () => {
             profile={`/static/images/student2.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={2}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/3"}>
@@ -134,6 +237,7 @@ const Home = () => {
             profile={`/static/images/student3.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={3}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/4"}>
@@ -143,6 +247,7 @@ const Home = () => {
             profile={`/static/images/student4.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={4}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/5"}>
@@ -152,6 +257,7 @@ const Home = () => {
             profile={`/static/images/student5.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={5}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/6"}>
@@ -161,6 +267,7 @@ const Home = () => {
             profile={`/static/images/student6.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={6}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/7"}>
@@ -170,6 +277,7 @@ const Home = () => {
             profile={`/static/images/student7.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={7}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/8"}>
@@ -179,6 +287,7 @@ const Home = () => {
             profile={`/static/images/student8.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={8}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/9"}>
@@ -188,6 +297,7 @@ const Home = () => {
             profile={`/static/images/student9.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={9}
+            contextFunction={handleFeedback}
           />
         </Link>
         <Link href={"/student/10"}>
@@ -197,6 +307,7 @@ const Home = () => {
             profile={`/static/images/student10.jpg`}
             setActualStudent={setActualStudent}
             studentPosition={10}
+            contextFunction={handleFeedback}
           />
         </Link>
       </section>

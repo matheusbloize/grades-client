@@ -2,21 +2,17 @@
 
 import { createContext, useState } from "react";
 
+import { StudentInfoHomePage } from "@/models/StudentModel";
+
 type AwardContextProviderProps = {
   children: React.ReactNode;
 };
 
-export interface StudentInterface {
-  name: string;
-  photo: string;
-  color: string;
-}
-
 interface AwardedStudentInterface {
-  award1?: StudentInterface;
-  award2?: StudentInterface;
-  award3?: StudentInterface;
-  award4?: StudentInterface;
+  award1: StudentInfoHomePage;
+  award2: StudentInfoHomePage;
+  award3: StudentInfoHomePage;
+  award4: StudentInfoHomePage;
 }
 
 type AwardContext = {
@@ -26,7 +22,7 @@ type AwardContext = {
   >;
 };
 
-const initalState = {
+const initalState: AwardedStudentInterface = {
   award1: {
     name: "Not defined yet",
     photo: "",
