@@ -16,7 +16,17 @@ const Home = () => {
   const [actualStudent, setActualStudent] = useState<HTMLDivElement | null>(
     null,
   );
+  const [render] = useState(true);
   let feedback: "#4aff7b" | "#f12815" | "#010101";
+
+  const checkFirstVisit = () => {
+    if (window && window.sessionStorage) {
+      if (sessionStorage.getItem("was_visited")) {
+        return;
+      }
+      sessionStorage.setItem("was_visited", "1");
+    }
+  };
 
   useEffect(() => {
     if (document.getElementById(`draggable-student-1`)) {
@@ -25,7 +35,16 @@ const Home = () => {
           .getElementById(`draggable-student-${i + 1}`)!
           .children[0].classList.add("drag");
       }
+      checkFirstVisit();
+      if (
+        document.getElementById("modal") &&
+        document.getElementById("modal")!.style.display === "none"
+      ) {
+        document.body.style.overflowY = "auto";
+      }
     }
+    scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAwardedContext = (
@@ -162,8 +181,47 @@ const Home = () => {
     return feedback!;
   };
 
+  const handleModal = (e: React.MouseEvent) => {
+    const currentTarget = e.currentTarget as HTMLDivElement;
+    currentTarget.style.display = "none";
+    document.body.style.overflowY = "auto";
+  };
+
   return (
     <main className="w-[95%] mx-auto flex-1 flex flex-col items-center mt-[1em]">
+      <div
+        id="modal"
+        onClick={handleModal}
+        className="absolute w-full h-full bg-[#010101e0] top-0 left-0 items-center text-[#f1f1f1] p-[20%] text-[1.2em] flex-col max-md:text-[.8em]"
+        style={{
+          display:
+            render &&
+            typeof window !== "undefined" &&
+            window.sessionStorage &&
+            sessionStorage.getItem("was_visited")
+              ? "none"
+              : "flex",
+        }}
+      >
+        <span className="text-[2em] max-md:text-[1.2em]">
+          Hello, Mr. John Doe.
+        </span>
+        The vacations are coming, finish your activities and start your
+        long-awaited vacation.
+        <ul className="list-decimal">
+          <li className="my-[1em]">
+            Choose the winners of the Effort Awards 2023 drag and dropping into
+            the right area, remember that you can repeat the student.
+          </li>
+          <li>
+            Enter each student&apos;s grades, if their grade average is above 8
+            they will receive a green border for passing, if they fail it will
+            be red. Those with a black border don&apos;t have notes yet, add
+            them.
+          </li>
+        </ul>
+        <span className="animate-pulse">Click anywhere to close</span>
+      </div>
       <div className="flex items-center">
         <Image src={trophyImage} alt="trophy" />
         <h2 className="text-[1.5em]">Effort Awards 2023</h2>

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inknut.className} bg-[#FDFFFA] flex flex-col text-[#010101]`}
+        className={`${inknut.className} bg-[#FDFFFA] flex flex-col text-[#010101] overflow-y-hidden`}
       >
         <Header />
         <AwardContextProvider>

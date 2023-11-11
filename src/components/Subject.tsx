@@ -25,7 +25,7 @@ const Subject = ({ name, gradePoints, subjectPosition }: Props) => {
       </div>
       <input
         onChange={handleGrade}
-        placeholder={points}
+        placeholder={points || "0"}
         type="number"
         min={0}
         max={10}

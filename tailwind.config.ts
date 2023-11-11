@@ -16,6 +16,9 @@ const config: Config = {
       boxShadow: {
         student: "0 0 1em 0 #010101",
       },
+      animation: {
+        pulse: "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
   plugins: [],

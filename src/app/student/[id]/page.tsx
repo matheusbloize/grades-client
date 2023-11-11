@@ -73,6 +73,9 @@ const Student = () => {
 
   useEffect(() => {
     findStudent();
+    if (document) {
+      document.body.style.overflowY = "auto";
+    }
   }, [findStudent, params.id]);
 
   const handleGrades = () => {
