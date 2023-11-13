@@ -32,9 +32,13 @@ const AwardedStudent = ({
     if (actualStudent) {
       contextFunction(
         (actualStudent!.children[0] as HTMLImageElement).alt,
-        `/static/images/student${
-          actualStudent.id[actualStudent.id.length - 1]
-        }.jpg`,
+        actualStudent.id[actualStudent.id.length - 1] === "0"
+          ? `/static/images/student${
+              actualStudent.id[actualStudent.id.length - 2]
+            }${actualStudent.id[actualStudent.id.length - 1]}.jpg`
+          : `/static/images/student${
+              actualStudent.id[actualStudent.id.length - 1]
+            }.jpg`,
         propColor,
         awardPosition,
       );
