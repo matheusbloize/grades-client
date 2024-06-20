@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import checkImage from "@/assets/images/check.svg";
@@ -23,9 +23,10 @@ import {
 import { useGradeContext } from "@/hooks/useGradeContext";
 import { StudentInfoStudentPage } from "@/models/StudentModel";
 
-const Student = ({ params }: { params: { id: string } }) => {
+const Student = () => {
   const { studentGrade, setStudentGrade } = useGradeContext();
   const [student, setStudent] = useState<StudentInfoStudentPage>();
+  const params = useParams();
 
   const findStudent = useCallback(() => {
     switch (params.id) {
