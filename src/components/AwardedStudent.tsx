@@ -54,6 +54,7 @@ const AwardedStudent = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       className="flex flex-col items-center"
+      data-testid="awarded-card"
     >
       <div
         className={`rounded-[.625em] w-[9.375em] h-[11.875em] flex justify-center items-center`}

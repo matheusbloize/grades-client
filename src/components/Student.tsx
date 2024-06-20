@@ -28,6 +28,7 @@ const Student = ({
   return (
     <div className="flex flex-col items-center">
       <div
+        data-testid={`student-${studentPosition}`}
         id={`draggable-student-${studentPosition}`}
         onDragStart={handleDragStart}
         className={`border-solid border-[.313em] rounded-[.625em] w-[9.375em] h-[11.875em] transition-all hover:shadow-student`}
